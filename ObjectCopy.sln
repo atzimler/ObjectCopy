@@ -7,6 +7,12 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.ObjectCopy", "ATZ.Objec
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ATZ.ObjectCopy.Tests", "ATZ.ObjectCopy.Tests\ATZ.ObjectCopy.Tests.csproj", "{F694D4D3-ABAA-490B-BC33-015D9430A467}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6D58D81-504B-4E6E-9A23-1C55C5DB451B}"
+	ProjectSection(SolutionItems) = preProject
+		AssemblyVersion.cs = AssemblyVersion.cs
+		ATZ.ObjectCopy.xml = ATZ.ObjectCopy.xml
+	EndProjectSection
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU

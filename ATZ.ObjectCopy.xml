@@ -1,0 +1,7 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<project name="ATZ.ObjectCopy" default="help">
+  <description>Build file for ATZ.ObjectCopy library.</description>
+
+  <property name="project.name" value="ObjectCopy" />
+  <include buildfile="../NAnt/ATZ.Build.xml" />
+</project>
