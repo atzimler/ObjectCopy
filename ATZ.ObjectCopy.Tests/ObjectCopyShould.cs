@@ -1,4 +1,6 @@
-﻿using ATZ.ObjectCopy.Tests.TestHelpers;
+﻿using System;
+using ATZ.ObjectCopy.Tests.TestHelpers;
+using CalendarBlocks.Model.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
@@ -89,6 +91,20 @@ namespace ATZ.ObjectCopy.Tests
 
             s.ObjectCopyTo(t, onlyProperties: new[] { nameof(DerivedClass.P3) });
             t.P3.Should().Be(42);
+        }
+
+        [Test]
+        public void CopyTaskModelCorrectly()
+        {
+            var task = new TaskModel
+            {
+                LifeAreaIdentifier = Guid.NewGuid()
+            };
+            var task2 = new TaskModel();
+
+            task.ObjectCopyTo(task2);
+
+            task2.LifeAreaIdentifier.Should().Be(task.LifeAreaIdentifier);
         }
     }
 }
