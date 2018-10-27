@@ -5,7 +5,7 @@ using ATZ.ObservableObjects;
 namespace CalendarBlocks.Model
 {
     [DataContract]
-    public class LifeAreaItemModel : ObservableObject
+    public class LifeAreaItemModel
     {
         private Guid? _lifeAreaIdentifier;
 
@@ -13,7 +13,7 @@ namespace CalendarBlocks.Model
         public Guid? LifeAreaIdentifier
         {
             get => _lifeAreaIdentifier;
-            set => Set(ref _lifeAreaIdentifier, value);
+            set => _lifeAreaIdentifier = value;
         }
     }
 }
