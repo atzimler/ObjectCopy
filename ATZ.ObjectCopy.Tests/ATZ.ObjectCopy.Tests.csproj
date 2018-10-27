@@ -183,7 +183,6 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="TestHelpers\BaseClass.cs" />
     <Compile Include="TestHelpers\BaseClass2.cs" />
-    <Compile Include="TestHelpers\BlockModel.cs" />
     <Compile Include="TestHelpers\DateInterval.cs" />
     <Compile Include="TestHelpers\DerivedClass.cs" />
     <Compile Include="TestHelpers\ILifeArea.cs" />
