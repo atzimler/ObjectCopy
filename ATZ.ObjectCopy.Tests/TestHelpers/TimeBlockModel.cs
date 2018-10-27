@@ -176,7 +176,7 @@ namespace CalendarBlocks.Model.TimeBlocks
         #endregion
 
         #region Protected Methods
-        protected override Guid GetId()
+        protected virtual Guid GetId()
         {
             // TODO: On next major version of the App, when data is migrated instead just loaded, the IObjectGuidId from LifeAreaItemModel derived classes should be moved to LifeAreaItemModel.
             return Id;

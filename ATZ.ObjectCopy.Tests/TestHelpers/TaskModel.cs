@@ -1,10 +1,9 @@
-﻿using ATZ.ObjectCopy;
-using JetBrains.Annotations;
-using System;
-using System.Collections.ObjectModel;
+﻿using System;
 using System.Runtime.Serialization;
+using CalendarBlocks.Model;
+using CalendarBlocks.Model.Tasks;
 
-namespace CalendarBlocks.Model.Tasks
+namespace ATZ.ObjectCopy.Tests.TestHelpers
 {
     [DataContract(Namespace = "http://schemas.datacontract.org/2004/07/CalendarBlocks")]
     public class TaskModel : LifeAreaItemModel
@@ -70,13 +69,10 @@ namespace CalendarBlocks.Model.Tasks
             get => _order;
             set => Set(ref _order, value);
         }
-
-        [NotNull]
-        public ObservableCollection<TaskModel> SubTasks { get; } = new ObservableCollection<TaskModel>();
         #endregion
 
         #region Protected Methods
-        protected override Guid GetId()
+        protected virtual Guid GetId()
         {
             // TODO: On next major version of the App, when data is migrated instead just loaded, the IObjectGuidId from LifeAreaItemModel derived classes should be moved to LifeAreaItemModel.
             return Id;
@@ -97,18 +93,6 @@ namespace CalendarBlocks.Model.Tasks
         public static bool operator !=(TaskModel left, TaskModel right)
         {
             return !(left == right);
-        }
-
-        [NotNull]
-        public TaskModel CloneForRepetition(DateTime day)
-        {
-            var clone = new TaskModel();
-            this.ObjectCopyTo(clone);
-
-            clone.Day = day;
-            clone.Id = Guid.NewGuid();
-
-            return clone;
         }
 
         public override bool Equals(object obj)
