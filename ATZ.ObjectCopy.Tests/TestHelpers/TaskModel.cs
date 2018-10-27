@@ -1,7 +1,6 @@
 ﻿using System;
 using System.Runtime.Serialization;
 using CalendarBlocks.Model;
-using CalendarBlocks.Model.Tasks;
 
 namespace ATZ.ObjectCopy.Tests.TestHelpers
 {
@@ -11,13 +10,7 @@ namespace ATZ.ObjectCopy.Tests.TestHelpers
         // TODO: Why do we have Title and Description on the TaskModel?
 
         #region Private Variables
-        private TaskCategory _category = TaskCategory.Task;
-        private bool _completed;
-        private DateTime? _day;
-        private string _description;
         private Guid _id;
-        private string _notes;
-        private decimal _order;
         #endregion
 
         #region Public Methods
