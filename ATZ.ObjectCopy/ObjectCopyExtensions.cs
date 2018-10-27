@@ -34,6 +34,7 @@ namespace ATZ.ObjectCopy
         [ItemNotNull]
         private static IEnumerable<string> ListPropertyNamesForCopy(Type type)
         {
+            return type.GetRuntimeProperties().Where(p => p != null).Where(p => p.DeclaringType == type).Select(p => p.Name);
             return type.GetRuntimeProperties().Where(p => p != null && p.DeclaringType != null).Where(p => p.DeclaringType.IsAssignableFrom(type)).Select(p => p.Name);
         }
 

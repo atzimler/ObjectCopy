@@ -93,18 +93,14 @@ namespace ATZ.ObjectCopy.Tests
         }
 
         [Test]
-        public void CopyGuidInBaseCorrectly()
+        public void CopyBaseClassPropertyCorrectly()
         {
-            var d1 = new GuidDerivedClass
-            {
-                Guid = 42
-                //Guid = Guid.NewGuid()
-            };
-            var d2 = new GuidDerivedClass();
+            var d1 = new DerivedClass { P1 = 42 };
+            var d2 = new DerivedClass();
 
             d1.ObjectCopyTo(d2);
 
-            d2.Guid.Should().Be(d1.Guid);
+            d2.P1.Should().Be(d1.P1);
         }
     }
 }
