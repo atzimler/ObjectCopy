@@ -185,7 +185,6 @@
     <Compile Include="TestHelpers\BaseClass2.cs" />
     <Compile Include="TestHelpers\DateInterval.cs" />
     <Compile Include="TestHelpers\DerivedClass.cs" />
-    <Compile Include="TestHelpers\ILifeArea.cs" />
     <Compile Include="TestHelpers\IntervalName.cs" />
     <Compile Include="TestHelpers\LifeAreaItemModel.cs" />
     <Compile Include="TestHelpers\NoGetterTestSourceClass.cs" />
@@ -193,7 +192,6 @@
     <Compile Include="TestHelpers\RepetitionModel.cs" />
     <Compile Include="TestHelpers\TaskCategory.cs" />
     <Compile Include="TestHelpers\TaskModel.cs" />
-    <Compile Include="TestHelpers\TimeBlockModel.cs" />
     <Compile Include="TestHelpers\WriteOnlyPropertyClass.cs" />
   </ItemGroup>
   <ItemGroup>
