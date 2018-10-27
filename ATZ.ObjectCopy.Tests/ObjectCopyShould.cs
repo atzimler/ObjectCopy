@@ -97,7 +97,8 @@ namespace ATZ.ObjectCopy.Tests
         {
             var d1 = new GuidDerivedClass
             {
-                Guid = Guid.NewGuid()
+                Guid = 42
+                //Guid = Guid.NewGuid()
             };
             var d2 = new GuidDerivedClass();
 
