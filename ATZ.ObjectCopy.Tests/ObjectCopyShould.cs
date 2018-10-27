@@ -93,7 +93,7 @@ namespace ATZ.ObjectCopy.Tests
         }
 
         [Test]
-        public void CopyNullableGuidInBaseCorrectly()
+        public void CopyGuidInBaseCorrectly()
         {
             var d1 = new GuidDerivedClass
             {
