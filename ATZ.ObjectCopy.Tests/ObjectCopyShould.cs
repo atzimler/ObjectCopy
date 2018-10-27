@@ -93,17 +93,17 @@ namespace ATZ.ObjectCopy.Tests
         }
 
         [Test]
-        public void CopyTaskModelCorrectly()
+        public void CopyNullableGuidInBaseCorrectly()
         {
-            var task = new TaskModel
+            var d1 = new GuidDerivedClass
             {
-                LifeAreaIdentifier = Guid.NewGuid()
+                Guid = Guid.NewGuid()
             };
-            var task2 = new TaskModel();
+            var d2 = new GuidDerivedClass();
 
-            task.ObjectCopyTo(task2);
+            d1.ObjectCopyTo(d2);
 
-            task2.LifeAreaIdentifier.Should().Be(task.LifeAreaIdentifier);
+            d2.Guid.Should().Be(d1.Guid);
         }
     }
 }
