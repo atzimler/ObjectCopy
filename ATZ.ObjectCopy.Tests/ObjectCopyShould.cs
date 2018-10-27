@@ -1,6 +1,5 @@
 ﻿using System;
 using ATZ.ObjectCopy.Tests.TestHelpers;
-using CalendarBlocks.Model.Tasks;
 using FluentAssertions;
 using NUnit.Framework;
 
