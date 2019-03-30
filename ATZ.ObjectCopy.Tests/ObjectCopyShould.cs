@@ -101,5 +101,16 @@ namespace ATZ.ObjectCopy.Tests
 
             d2.P1.Should().Be(d1.P1);
         }
+
+        [Test]
+        public void IgnoreIncompatiblePropertyTypes()
+        {
+            var incompatibleA = new IncompatibleA { P1 = 42 };
+            var incompatibleB = new IncompatibleB { P1 = "unset" };
+            
+            incompatibleA.ObjectCopyTo(incompatibleB);
+
+            incompatibleB.P1.Should().Be("unset");
+        }
     }
 }

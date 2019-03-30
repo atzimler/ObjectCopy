@@ -8,8 +8,14 @@
     <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
     <Authors>Attila Tamas Zimler</Authors>
     <Company>Attila Tamas Zimler</Company>
+    <Owners>Attila Tamas Zimler</Owners>
     <Description>Library for copying objects based on the name of the properties.</Description>
     <Copyright>Copyright (C) 2018</Copyright>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <PackageReleaseNotes>This is a placeholder, please see RELEASENOTES.txt at https://github.com/atzimler/ObservableListFilters/blob/master/ATZ.ObservableListFilters/RELEASENOTES.txt</PackageReleaseNotes>
+    <PackageLicenseUrl>https://raw.githubusercontent.com/atzimler/ObjectCopy/master/LICENSE.txt</PackageLicenseUrl>
+    <PackageProjectUrl>https://github.com/atzimler/ObjectCopy</PackageProjectUrl>
+    <PackageRequireLicenseAcceptance>true</PackageRequireLicenseAcceptance>
   </PropertyGroup>
 
   <ItemGroup>

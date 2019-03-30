@@ -6,6 +6,9 @@ using System.Reflection;
 
 namespace ATZ.ObjectCopy
 {
+    /// <summary>
+    /// Extension class for adding ObjectCopyTo extension method to the type: object.
+    /// </summary>
     public static class ObjectCopyExtensions
     {
         private static void CopyObjectProperty([NotNull] object source, [NotNull] object target, string propertyName)
@@ -49,6 +52,34 @@ namespace ATZ.ObjectCopy
             return targetProperty.PropertyType.GetTypeInfo().IsAssignableFrom(sourceProperty.PropertyType.GetTypeInfo());
         }
 
+        /// <summary>
+        /// Copy source object to target object with specified parameter.
+        /// </summary>
+        /// <remarks>
+        /// The copy operation from the source to the target works as following:
+        /// <list type="number">
+        /// <item><description>
+        /// Enumerate public properties of the source object at the source type level.
+        /// </description></item>
+        /// <item><description>
+        /// Enumerate public properties of the target object at the target type level.
+        /// </description></item>
+        /// <item><description>
+        /// 
+        /// </description></item>
+        /// </list>
+        /// </remarks>
+        /// <param name="source">The object to copy data from.</param>
+        /// <param name="target">The object to copy data to.</param>
+        /// <param name="atSourceTypeLevel">
+        /// The type of the source to enumerate properties. If not specified it is the actual type of the source object.
+        /// This can be used to limit the source type to base class of the source.
+        /// </param>
+        /// <param name="atTargetTypeLevel">
+        /// The type of the target to enumerate properties. If not specified it is the actual type of the target object.
+        /// This can be used to limit the target type to base class of the target.
+        /// </param>
+        /// <param name="onlyProperties">List of properties to limit the copy operations to.</param>
         public static void ObjectCopyTo([NotNull] this object source, [NotNull] object target, Type atSourceTypeLevel = null, Type atTargetTypeLevel = null, IEnumerable<string> onlyProperties = null)
         {
             if (atSourceTypeLevel == null)
@@ -63,19 +94,16 @@ namespace ATZ.ObjectCopy
             var sourceProperties = ListPropertyNamesForCopy(atSourceTypeLevel);
             var targetProperties = ListPropertyNamesForCopy(atTargetTypeLevel);
 
-            var propertyNamesToCopy = sourceProperties.Intersect(targetProperties).ToList();
+            var propertyNamesToVerify = sourceProperties.Intersect(targetProperties).ToList();
             if (onlyProperties != null)
             {
                 var onlyListOfProperties = onlyProperties.ToList();
-                var propertyNamesToVerify = onlyListOfProperties.Where(p => !propertyNamesToCopy.Contains(p)).ToList();
-                propertyNamesToCopy = propertyNamesToCopy.Intersect(onlyListOfProperties).ToList();
+                propertyNamesToVerify = propertyNamesToVerify.Intersect(onlyListOfProperties).ToList();
 
-                propertyNamesToVerify.ForEach(p =>
-                {
-                    if (PropertyIsCompatibleOnTypes(atSourceTypeLevel, atTargetTypeLevel, p))
-                        propertyNamesToCopy.Add(p);
-                });
             }
+            var propertyNamesToCopy = propertyNamesToVerify
+                .Where(p => PropertyIsCompatibleOnTypes(atSourceTypeLevel, atTargetTypeLevel, p))
+                .ToList();
             propertyNamesToCopy.ForEach(p => CopyObjectProperty(source, target, p));
         }
     }
