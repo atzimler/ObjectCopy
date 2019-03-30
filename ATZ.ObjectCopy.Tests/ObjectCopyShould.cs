@@ -1,5 +1,4 @@
-﻿using System;
-using ATZ.ObjectCopy.Tests.TestHelpers;
+﻿using ATZ.ObjectCopy.Tests.TestHelpers;
 using FluentAssertions;
 using NUnit.Framework;
 
