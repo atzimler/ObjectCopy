@@ -65,7 +65,15 @@ namespace ATZ.ObjectCopy
         /// Enumerate public properties of the target object at the target type level.
         /// </description></item>
         /// <item><description>
-        /// 
+        /// Intersect the source property list with target property list and if specified with the onlyProperties list.
+        /// </description></item>
+        /// <item><description>
+        /// Limit the properties to where on the source it has a getter and on the target has a setter and the types of
+        /// the properties are compatible.
+        /// </description></item>
+        /// <item><description>
+        /// Copy the resulting list of properties by getting the value through the getter from the source and setting
+        /// it through the setter on the target.
         /// </description></item>
         /// </list>
         /// </remarks>
