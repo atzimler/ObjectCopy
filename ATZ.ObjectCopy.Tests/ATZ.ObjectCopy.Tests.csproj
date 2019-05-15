@@ -172,6 +172,8 @@
     <Compile Include="TestHelpers\IncompatibleB.cs" />
     <Compile Include="TestHelpers\NoGetterTestSourceClass.cs" />
     <Compile Include="TestHelpers\ReadOnlyPropertyClass.cs" />
+    <Compile Include="TestHelpers\RenamedHiddenPropertyBase.cs" />
+    <Compile Include="TestHelpers\RenamedHiddenPropertyDerived.cs" />
     <Compile Include="TestHelpers\WriteOnlyPropertyClass.cs" />
   </ItemGroup>
   <ItemGroup>
