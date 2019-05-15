@@ -49,6 +49,11 @@ namespace ATZ.ObjectCopy
             var sourceProperty = sourceType.GetRuntimeProperty(propertyName);
             var targetProperty = targetType.GetRuntimeProperty(propertyName);
 
+            if (sourceProperty == null || targetProperty == null)
+            {
+                return false;
+            }
+
             return targetProperty.PropertyType.GetTypeInfo().IsAssignableFrom(sourceProperty.PropertyType.GetTypeInfo());
         }
 

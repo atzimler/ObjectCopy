@@ -112,5 +112,14 @@ namespace ATZ.ObjectCopy.Tests
 
             incompatibleB.P1.Should().Be("unset");
         }
+
+        [Test]
+        public void NotCrashOnPrivateProperties()
+        {
+            var o1 = new RenamedHiddenPropertyDerived();
+            var o2 = new RenamedHiddenPropertyDerived();
+            
+            Assert.DoesNotThrow(() => o1.ObjectCopyTo(o2));
+        }
     }
 }
