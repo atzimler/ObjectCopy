@@ -121,5 +121,72 @@ namespace ATZ.ObjectCopy.Tests
             
             Assert.DoesNotThrow(() => o1.ObjectCopyTo(o2));
         }
+
+        [Test]
+        public void CopyCollectionsProperly()
+        {
+            var source = new ObjectWithCollectionProperty<DerivedClass>();
+            var target = new ObjectWithCollectionProperty<BaseClass>();
+            
+            var d = new DerivedClass();
+            var b = new BaseClass();
+            
+            source.Property.Add(d);
+            target.Property.Add(b);
+            
+            source.ObjectCopyTo(target);
+            target.Property.Should().ContainInOrder(d).And.HaveCount(1);
+        }
+
+        [Test]
+        public void NotCopyCollectionsWithIncompatibleTypes()
+        {
+            var source = new ObjectWithCollectionProperty<BaseClass>();
+            var target = new ObjectWithCollectionProperty<DerivedClass>();
+            
+            var d = new DerivedClass();
+            var b = new BaseClass();
+            
+            source.Property.Add(b);
+            target.Property.Add(d);
+            
+            source.ObjectCopyTo(target);
+            target.Property.Should().ContainInOrder(d).And.HaveCount(1);
+        }
+
+        [Test]
+        public void NotCopyIfSourceCollectionIsNull()
+        {
+            var o = new BaseClass();
+            
+            var source = new ObjectWithCollectionProperty<BaseClass>
+            {
+                Property = null
+            };
+            var target = new ObjectWithCollectionProperty<BaseClass>
+            {
+                Property = { o }
+            };
+            
+            Assert.DoesNotThrow(() => source.ObjectCopyTo(target));
+            target.Property.Should().ContainInOrder(o).And.HaveCount(1);
+        }
+
+        [Test]
+        public void NotCopyIfTargetColletionIsNull()
+        {
+            var o = new BaseClass();
+            
+            var source = new ObjectWithCollectionProperty<BaseClass>
+            {
+                Property = { o }
+            };
+            var target = new ObjectWithCollectionProperty<BaseClass>
+            {
+                Property = null
+            };
+            
+            Assert.DoesNotThrow(() => source.ObjectCopyTo(target));
+        }
     }
 }

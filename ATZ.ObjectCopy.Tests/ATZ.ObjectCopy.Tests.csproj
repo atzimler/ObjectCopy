@@ -35,8 +35,8 @@
     <Reference Include="FluentAssertions, Version=5.3.0.0, Culture=neutral, PublicKeyToken=33f2691a05b67b6a">
       <HintPath>..\packages\FluentAssertions.5.3.0\lib\net45\FluentAssertions.dll</HintPath>
     </Reference>
-    <Reference Include="JetBrains.Annotations, Version=10.4.0.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
-      <HintPath>..\packages\JetBrains.Annotations.10.4.0\lib\net\JetBrains.Annotations.dll</HintPath>
+    <Reference Include="JetBrains.Annotations, Version=2019.1.1.0, Culture=neutral, PublicKeyToken=1010a0d8d6380325">
+      <HintPath>..\packages\JetBrains.Annotations.2019.1.1\lib\net20\JetBrains.Annotations.dll</HintPath>
       <Private>True</Private>
     </Reference>
     <Reference Include="Microsoft.Win32.Primitives, Version=4.0.2.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a">
@@ -171,6 +171,7 @@
     <Compile Include="TestHelpers\IncompatibleA.cs" />
     <Compile Include="TestHelpers\IncompatibleB.cs" />
     <Compile Include="TestHelpers\NoGetterTestSourceClass.cs" />
+    <Compile Include="TestHelpers\ObjectWithCollectionProperty.cs" />
     <Compile Include="TestHelpers\ReadOnlyPropertyClass.cs" />
     <Compile Include="TestHelpers\RenamedHiddenPropertyBase.cs" />
     <Compile Include="TestHelpers\RenamedHiddenPropertyDerived.cs" />

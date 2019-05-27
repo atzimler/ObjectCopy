@@ -1,5 +1,6 @@
 ﻿using JetBrains.Annotations;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Reflection;
@@ -11,10 +12,57 @@ namespace ATZ.ObjectCopy
     /// </summary>
     public static class ObjectCopyExtensions
     {
+        private static void CollectionClear(object collection)
+        {
+            var methodInfo = collection.GetType().GetMethod(nameof(ICollection<int>.Clear));
+            methodInfo?.Invoke(collection, null);
+        }
+
+        private static IEnumerator CollectionGetEnumerator(object collection)
+        {
+            var methodInfo = collection.GetType().GetMethod(nameof(ICollection<int>.GetEnumerator));
+            return (IEnumerator)methodInfo?.Invoke(collection, null);
+        }
+        
+        private static bool CollectionTypeIsAssignable(Type[] sourceItemTypes, Type[] targetItemTypes)
+            // Currently we don't support multiple type parameters and
+            // we only support generic collections (old System.Collections.ICollection has no Clear() method).
+               => HasOneGenericParameterAndSourceItemTypeIsAssignableToTargetItemType(sourceItemTypes, targetItemTypes);
+
+        private static void CopyCollectionProperty(
+            object source, object target,
+            [NotNull] PropertyInfo sourceProperty, [NotNull] PropertyInfo targetProperty)
+        {
+            var sourceCollection = GetCollection(source, sourceProperty);
+            var targetCollection = GetCollection(target, targetProperty);
+            if (sourceCollection == null || targetCollection == null)
+            {
+                return;
+            }
+
+            CollectionClear(targetCollection);
+            var enumerator = CollectionGetEnumerator(sourceCollection);
+            var addMethodInfo = targetCollection.GetType().GetMethod(nameof(ICollection<int>.Add));
+            if (addMethodInfo == null)
+            {
+                return;
+            }
+            
+            while (enumerator.MoveNext())
+            {
+                addMethodInfo.Invoke(targetCollection, new[] { enumerator.Current });
+            }
+        }
+
         private static void CopyObjectProperty([NotNull] object source, [NotNull] object target, string propertyName)
         {
             var sourceProperty = source.GetType().GetRuntimeProperty(propertyName);
             var targetProperty = target.GetType().GetRuntimeProperty(propertyName);
+            if (IsCollection(sourceProperty.PropertyType))
+            {
+                CopyCollectionProperty(source, target, sourceProperty, targetProperty);
+                return;
+            }
 
             CopyObjectProperty(source, target, sourceProperty, targetProperty);
         }
@@ -33,6 +81,17 @@ namespace ATZ.ObjectCopy
             set?.Invoke(target, new[] { get.Invoke(source, null) });
         }
 
+        private static object GetCollection(object obj, [NotNull] PropertyInfo propertyInfo)
+        {
+            var get = propertyInfo.GetMethod;
+            return get == null ? null : get.Invoke(obj, null);
+        }
+
+        private static bool HasOneGenericParameterAndSourceItemTypeIsAssignableToTargetItemType(Type[] sourceItemTypes, Type[] targetItemTypes)
+            => sourceItemTypes.Length == 1 && targetItemTypes.Length == 1 && targetItemTypes[0].IsAssignableFrom(sourceItemTypes[0]);
+
+        private static bool IsCollection(Type type) => typeof(ICollection).IsAssignableFrom(type);
+        
         [NotNull]
         [ItemNotNull]
         private static IEnumerable<string> ListPropertyNamesForCopy(Type type)
@@ -54,7 +113,19 @@ namespace ATZ.ObjectCopy
                 return false;
             }
 
-            return targetProperty.PropertyType.GetTypeInfo().IsAssignableFrom(sourceProperty.PropertyType.GetTypeInfo());
+            return PropertyTypeIsAssignable(sourceProperty.PropertyType.GetTypeInfo(), targetProperty.PropertyType.GetTypeInfo());
+        }
+
+        private static bool PropertyTypeIsAssignable(TypeInfo sourcePropertyType, TypeInfo targetPropertyType)
+        {
+            if (IsCollection(sourcePropertyType) && IsCollection(targetPropertyType))
+            {
+                return CollectionTypeIsAssignable(
+                    sourcePropertyType.GetGenericArguments(), 
+                    targetPropertyType.GetGenericArguments());
+            }
+            
+            return targetPropertyType.IsAssignableFrom(sourcePropertyType);
         }
 
         /// <summary>
