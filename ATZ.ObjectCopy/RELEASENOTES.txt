@@ -1,0 +1,10 @@
+1.1.0:
+- Added Collection copy code, now collection items are copied from source property to target property if the
+  item types are compatible.
+- Fixed incorrect release note reference. Accidentally was pointing to ObservableListFilters.
+
+1.0.3:
+- Fixed NullReferenceExceptions in a very specific edge case.
+
+1.0.2:
+- Initial public release.
