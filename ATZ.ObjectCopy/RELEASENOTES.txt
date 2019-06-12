@@ -1,3 +1,6 @@
+1.1.1:
+- Removing reference to specified version of the .NET Standard library.
+
 1.1.0:
 - Added Collection copy code, now collection items are copied from source property to target property if the
   item types are compatible.
