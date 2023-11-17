@@ -10,7 +10,6 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{D6D58D81-504B-4E6E-9A23-1C55C5DB451B}"
 	ProjectSection(SolutionItems) = preProject
 		AssemblyVersion.cs = AssemblyVersion.cs
-		ATZ.ObjectCopy.xml = ATZ.ObjectCopy.xml
 		LICENSE.txt = LICENSE.txt
 	EndProjectSection
 EndProject
